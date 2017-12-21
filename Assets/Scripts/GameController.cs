@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -17,9 +18,11 @@ public class GameController : MonoBehaviour
 	Color[] myColors = { Color.blue, Color.red, Color.green, Color.yellow, Color.magenta };
 	int score = 0;
 	GameObject activeCube = null;
-	int rainbowPoints = 10;
-	int sameColorPoints = 5;
-
+	int rainbowPoints = 5;
+	int sameColorPoints = 10;
+	public Text scoreText;
+	public Text nextCubeText;
+	bool gameOver = false;
 
 
 	// Use this for initialization
@@ -58,11 +61,25 @@ public class GameController : MonoBehaviour
 		//end the game
 		if (win) {
 			//players win
-			print ("You've won! Woo!");
+			nextCubeText.text = "You Win!";
+		
 		} else {
 			//players lose
-			print ("You've lost. Please try again!");
+			nextCubeText.text = "You Lose. Try again!";
+
 		}
+		Destroy (nextCube);
+
+		nextCube = null;
+
+		//disable all cubes in grid
+		for (int x = 0; x < gridX; x++) {
+			for (int y = 0; y < gridY; y++) {
+				grid [x, y].GetComponent<CubeController> ().nextCube = true;
+			}
+		}
+
+		gameOver = true;
 	}
 
 
@@ -306,8 +323,13 @@ public class GameController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	ProcessKeyboardInput ();
-	Score ();
+		// if time remains in the game
+		if (Time.time < gameLength) {
+
+		
+		ProcessKeyboardInput ();
+		Score ();
+
 
 		
 		if (Time.time > turnLength * turn) {
@@ -316,11 +338,27 @@ public class GameController : MonoBehaviour
 			//if we still have an existing next cube
 			if (nextCube != null) {
 				score -= 1;
+				//ensure score never goes negative
+				if (score < 0) {
+					score = 0;
+				}
 				AddRandomBlackCube ();
 			}
 
 			CreateNextCube ();
 		}
-
+		// update Score UI
+		scoreText.text = "Score: " + score;
+	}
+	// time is up
+		else if (!gameOver) {
+		if (score > 0) {
+			EndGame (true);
+		}
+		else {
+			EndGame (false);
+		}
 	}
 }
+}
+
