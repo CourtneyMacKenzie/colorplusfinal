@@ -300,6 +300,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubePrefab: {fileID: 1516983378543780, guid: ac9e941db68bbd042a38159c57c7b36e, type: 2}
+  nextCubePrefab: {fileID: 1470377070084274, guid: 18819ce72bc9b72459b1308e4f4d7173,
+    type: 2}
 --- !u!1 &895455982
 GameObject:
   m_ObjectHideFlags: 0
