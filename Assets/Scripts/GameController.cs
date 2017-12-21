@@ -17,6 +17,14 @@ public class GameController : MonoBehaviour
 	Color[] myColors = { Color.blue, Color.red, Color.green, Color.yellow, Color.magenta };
 	int score = 0;
 
+	// Use this for initialization
+	void Start ()
+	{
+		CreateGrid ();
+
+	}
+
+
 	void CreateGrid ()
 	{
 		grid = new GameObject[gridX, gridY];
@@ -25,6 +33,8 @@ public class GameController : MonoBehaviour
 			for (int x = 0; x < gridX; x++) {
 				cubePos = new Vector3 (x * 2, y * 2, 0);
 				grid [x, y] = Instantiate (cubePrefab, cubePos, Quaternion.identity);
+				grid [x, y].GetComponent<CubeController> ().myX = x;
+				grid [x, y].GetComponent<CubeController> ().myY = y;
 			}
 		}
 	}
@@ -94,6 +104,7 @@ public class GameController : MonoBehaviour
 		//no available cube in that row
 		if (myCube == null) {
 			EndGame (false); 
+
 		} else {
 			//assign the nextCube's color to the chosen cube
 			myCube.GetComponent<Renderer> ().material.color = color;
@@ -107,7 +118,6 @@ public class GameController : MonoBehaviour
 		GameObject whiteCube = FindAvailableCube (y);
 
 		SetCubeColor (whiteCube, nextCube.GetComponent<Renderer> ().material.color);
-	
 
 	}
 
@@ -148,13 +158,7 @@ public class GameController : MonoBehaviour
 
 
 
-	// Use this for initialization
-	void Start ()
-	{
-		CreateGrid ();
 
-	}
-	
 	// Update is called once per frame
 	void Update ()
 	{
