@@ -185,7 +185,7 @@ public class GameController : MonoBehaviour
 			
 			}
 		} 
-		else if (cubeColor == Color.white) {
+		else if (cubeColor == Color.white && activeCube != null) {
 			int xDist = clickedCube.GetComponent<CubeController> ().myX - activeCube.GetComponent<CubeController> ().myX;
 			int yDist = clickedCube.GetComponent<CubeController> ().myY - activeCube.GetComponent<CubeController> ().myY;
 
