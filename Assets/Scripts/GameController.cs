@@ -39,7 +39,6 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-
 	void CreateNextCube ()
 	{
 		nextCube = Instantiate (cubePrefab, nextCubePos, Quaternion.identity);
