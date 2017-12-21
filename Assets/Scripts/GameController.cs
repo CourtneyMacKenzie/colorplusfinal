@@ -50,7 +50,7 @@ int FindAvailableCube (int y) {
 	//given a specific row, find white cube in that row and return y value or if there isn't one, return -1
 }
 void PlaceNextCube (int y) {
-	int y = FindAvailableCube (y);
+	int x = FindAvailableCube (y);
 
 	//placeholder, just return a random x value
 	return Random.Range(0, gridX);
