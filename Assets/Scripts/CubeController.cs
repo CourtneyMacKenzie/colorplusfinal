@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CubeController : MonoBehaviour {
+	public int x, y;
 
-	public int x;
-	public int y;
 	// Use this for initialization
 	void Start () {
 		
@@ -15,9 +14,4 @@ public class CubeController : MonoBehaviour {
 	void Update () {
 		
 	}
-	void OnMouseDown () {
-		GameController.ProcessClick (this);
-	}
 }
-
-
